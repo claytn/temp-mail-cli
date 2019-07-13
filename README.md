@@ -18,6 +18,12 @@ Fetching email's inbox
 
 ## Examples
 
+Generating a Temporary Email
+![gif of temp email generation](./resources/temp-mail-gen.gif)
+
+Fetching Email's Inbox
+![gif of inbox fetching](./resources/temp-mail-inbox.gif)
+
 ## License
 
 Copyright © 2019 FIXME
