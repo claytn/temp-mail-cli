@@ -1,4 +1,4 @@
-(ns ghost-mail.core
+(ns temp-mail-cli.core
   (:use [hickory.core])
   (:require
    [clojure.core.reducers :as r]
@@ -13,7 +13,7 @@
 (def base-url "https://privatix-temp-mail-v1.p.rapidapi.com/request/mail/id/")
 
 (def headers {"X-RapidAPI-Host" "privatix-temp-mail-v1.p.rapidapi.com"
-              "X-RapidAPI-Key" "<TEMP-MAIL-API-KEY>"})
+              "X-RapidAPI-Key" "<API-KEY>"})
 
 (defn cookie-disabler [^HttpClientBuilder builder
                        request]

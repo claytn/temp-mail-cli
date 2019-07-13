@@ -1,32 +1,22 @@
 # temp-mail-cli
 
-FIXME: description
+A command line tool to support http://temp-mail.org
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Download a demo .jar from https://marsha88.github.io/projects/temp-mail-cli.jar
 
 ## Usage
 
-FIXME: explanation
+Generating a temporary email
 
-    $ java -jar temp-mail-cli-0.1.0-standalone.jar [args]
+`$ java -jar temp-mail-cli.jar`
 
-## Options
+Fetching email's inbox
 
-FIXME: listing of options this app accepts.
+`$ java -jar temp-mail-cli.jar email@example.com`
 
 ## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
