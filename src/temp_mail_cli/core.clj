@@ -5,7 +5,8 @@
    [clj-http.client :as client]
    [hickory.select :as s]
    [digest]
-   [spinner.core :as spin])
+   [spinner.core :as spin]
+   [temp-mail-cli.clipboard :as clipboard])
   (:import
    (org.apache.http.impl.client HttpClientBuilder))
   (:gen-class))
@@ -35,14 +36,14 @@
                      message :mail_text}]
   (if error
     "Inbox Empty"
-    (str "From: " from "\nSubject: " subject "\n\n" message "\n\n")))
+    (str "From: " from "\nSubject: " subject "\n\n" message "\n")))
 
 (defn format-inbox [emails]
   (r/fold str (map format-email emails)))
 
 (defn print-inbox [emails]
-  (if emails (println (str "\n\n" (format-inbox emails)))
-      (println "\n\nInbox Empty\n\n")))
+  (if emails (println (str "\n" (format-inbox emails)))
+      (println "\n📭 Inbox Empty 📭\n")))
 
 (defn fetch-inbox [email]
   (let [api-resp (-> email digest/md5 email-request)]
@@ -61,7 +62,7 @@
     email-address))
 
 (defn print-new-email [email]
-  (println (str "Temporary Email: " email)))
+  (println (str "✉️  Temporary Email: " email)))
 
 (defn load-data-with-spinner [f]
   "Displays spinning animation while function f is running - result of f is returned"
@@ -70,6 +71,9 @@
         result (f)]
     (spin/stop! s)
     result))
+
+(defn email-copied-notification []
+  (println "✅ Email copied to clipboard"))
 
 (defn print-usage []
   "Usage:\nGenerating a temporary email: ghost-app\n
@@ -80,6 +84,8 @@
   (let [len (count args)]
     (cond
       (= len 0) (let [temp-email (load-data-with-spinner generate-email)]
+                  (clipboard/spit-clipboard temp-email)
+                  (email-copied-notification)
                   (print-new-email temp-email))
       (= len 1) (let [inbox (load-data-with-spinner #(fetch-inbox (first args)))]
                   (print-inbox inbox))
